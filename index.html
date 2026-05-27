@@ -1,306 +1,459 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Nguyen Minh - Menu Premium</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        :root {
-            --accent-blue: #00d2ff;
-            --gold: #ffda44;
-            --glass-bg: rgba(255, 255, 255, 0.05); 
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --neon-green: #39ff14;
-        }
+<title>Nguyen Minh - Menu Premium</title>
 
-        * {
-            box-sizing: border-box;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap');
 
-        body {
-            background: #05050a;
-            color: #fff;
-            font-family: 'Lexend', sans-serif;
-            margin: 0;
-            padding: 20px 0; /* Bỏ padding ngang của body để tránh tràn */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /* Khóa cuộn ngang tuyệt đối */
-            overflow-x: hidden; 
-            width: 100vw;
-            min-height: 100vh;
-        }
+:root{
+    --accent-blue:#00d2ff;
+    --gold:#ffda44;
+    --glass-bg:rgba(255,255,255,0.05);
+    --glass-border:rgba(255,255,255,0.1);
+    --neon-green:#39ff14;
+}
 
-        /* ----- HIỆU ỨNG VŨ TRỤ ----- */
-        .stars-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-        }
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-        .star {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            opacity: 0.6;
-            animation: moveStar linear infinite;
-        }
+body{
+    background:#05050a;
+    color:#fff;
+    font-family:'Lexend',sans-serif;
+    overflow-x:hidden;
+    min-height:100vh;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:20px 0;
+    position:relative;
+}
 
-        @keyframes moveStar {
-            from { transform: translateZ(0) scale(0.5); opacity: 0; }
-            50% { opacity: 1; }
-            to { transform: translateZ(1000px) scale(1.5); opacity: 0; top: 100%; left: 100%; }
-        }
+/* ===== BACKGROUND ===== */
 
-        /* ----- NỘI DUNG CHÍNH ----- */
-        .content-wrapper {
-            width: 92%; /* Giới hạn độ rộng nội dung */
-            max-width: 480px;
-            z-index: 1;
-            margin-bottom: 50px;
-        }
+.stars-container{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background:radial-gradient(ellipse at bottom,#1B2735 0%,#090A0F 100%);
+    overflow:hidden;
+}
 
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    opacity:.6;
+    animation:moveStar linear infinite;
+}
 
-        .brand {
-            font-size: 2.2rem; /* Thu nhỏ nhẹ để vừa 1 dòng trên mobile */
-            font-weight: 700;
-            letter-spacing: 2px;
-            background: linear-gradient(to right, #fff, var(--accent-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin: 0;
-            text-transform: uppercase;
-            white-space: nowrap; /* Ép buộc nằm trên 1 dòng */
-        }
+@keyframes moveStar{
+    from{
+        transform:translateZ(0) scale(.5);
+        opacity:0;
+    }
 
-        .card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 25px;
-            backdrop-filter: blur(15px); 
-            -webkit-backdrop-filter: blur(15px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            width: 100%;
-        }
+    50%{
+        opacity:1;
+    }
 
-        h2 {
-            font-size: 1.1rem;
-            margin: 0 0 20px 0;
-            color: var(--accent-blue);
-            text-transform: uppercase;
-            border-left: 5px solid var(--accent-blue);
-            padding-left: 12px;
-        }
+    to{
+        transform:translateZ(1000px) scale(1.5);
+        opacity:0;
+        top:100%;
+        left:100%;
+    }
+}
 
-        .price-table {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 18px;
-        }
+/* ===== FIRE RAIN ===== */
 
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 12px 15px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-        }
+.fire{
+    position:fixed;
+    top:-60px;
+    z-index:-1;
+    pointer-events:none;
+    animation:fallFire linear forwards;
+    filter:drop-shadow(0 0 10px orange);
+    opacity:.9;
+}
 
-        .price-value { font-weight: 700; color: var(--gold); }
+@keyframes fallFire{
+    0%{
+        transform:translateY(-60px) rotate(0deg);
+        opacity:0;
+    }
 
-        .desc-box {
-            background: rgba(57, 255, 20, 0.05);
-            padding: 15px;
-            border-radius: 12px;
-            border-left: 4px solid var(--neon-green);
-        }
+    10%{
+        opacity:1;
+    }
 
-        .desc-text { 
-            font-size: 0.85rem; 
-            color: #ddd; 
-            line-height: 1.6; 
-            white-space: pre-line;
-            text-transform: uppercase;
-            display: block;
-        }
+    100%{
+        transform:translateY(110vh) rotate(360deg);
+        opacity:0;
+    }
+}
 
-        .footer {
-            text-align: center;
-            padding: 30px 15px;
-            width: 100%;
-            border-top: 1px solid var(--glass-border);
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-        }
+/* ===== CONTENT ===== */
 
-        .footer-info { font-size: 1.1rem; font-weight: 700; }
-    </style>
+.content-wrapper{
+    width:92%;
+    max-width:480px;
+    z-index:2;
+    margin-bottom:50px;
+}
+
+header{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.brand{
+    font-size:2.2rem;
+    font-weight:700;
+    letter-spacing:2px;
+    background:linear-gradient(to right,#fff,var(--accent-blue));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-transform:uppercase;
+    white-space:nowrap;
+}
+
+.sub{
+    font-size:.75rem;
+    letter-spacing:3px;
+    color:var(--accent-blue);
+    text-transform:uppercase;
+    margin-top:10px;
+}
+
+.card{
+    width:100%;
+    background:var(--glass-bg);
+    border:1px solid var(--glass-border);
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:25px;
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+
+h2{
+    font-size:1.1rem;
+    margin-bottom:20px;
+    color:var(--accent-blue);
+    text-transform:uppercase;
+    border-left:5px solid var(--accent-blue);
+    padding-left:12px;
+}
+
+.price-table{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.price-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,.08);
+    padding:12px 15px;
+    border-radius:12px;
+    font-size:.9rem;
+}
+
+.price-value{
+    font-weight:700;
+    color:var(--gold);
+}
+
+.desc-box{
+    background:rgba(57,255,20,.05);
+    padding:15px;
+    border-radius:12px;
+    border-left:4px solid var(--neon-green);
+}
+
+.desc-text{
+    font-size:.85rem;
+    color:#ddd;
+    line-height:1.6;
+    white-space:pre-line;
+    text-transform:uppercase;
+    display:block;
+}
+
+/* ===== FOOTER ===== */
+
+.footer{
+    width:100%;
+    text-align:center;
+    padding:30px 15px;
+    border-top:1px solid var(--glass-border);
+    background:var(--glass-bg);
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+}
+
+.footer-info{
+    font-size:1.1rem;
+    font-weight:700;
+}
+
+.owner{
+    color:var(--gold);
+    margin-top:10px;
+    font-weight:700;
+    text-transform:uppercase;
+}
+</style>
 </head>
+
 <body>
 
 <div class="stars-container" id="starfield"></div>
 
 <div class="content-wrapper">
-    <header>
-        <h1 class="brand">NGUYEN MINH</h1>
-        <div style="font-size: 0.75rem; letter-spacing: 3px; color: var(--accent-blue); text-transform: uppercase; margin-top: 10px;">DỊCH VỤ PREMIUM</div>
-    </header>
 
-    <div class="card">
-        <h2>🎯 HỖ TRỢ KÉO TÂM</h2>
-        <div class="price-table">
-            <div class="price-row"><span>CẤU HÌNH IOS</span><span class="price-value">50K - 500K</span></div>
-            <div class="price-row"><span>DATA ANDROID</span><span class="price-value">150K/1 CHỨC NĂNG</span></div>
+<header>
+    <h1 class="brand">NGUYEN MINH</h1>
+    <div class="sub">DỊCH VỤ PREMIUM</div>
+</header>
+
+<div class="card">
+    <h2>🎯 HỖ TRỢ KÉO TÂM</h2>
+
+    <div class="price-table">
+        <div class="price-row">
+            <span>CẤU HÌNH IOS</span>
+            <span class="price-value">50K - 500K</span>
         </div>
-        <div class="desc-box">
-            <span class="desc-text" style="color: var(--neon-green); font-weight: 700;">
-               SỬ DỤNG VĨNH VIỄN, AN TOÀN 100% KHÔNG CAN THIỆP VÀO GAME, CHỈ LÀ FILE NGOÀI MÁY GIÚP KÉO DỄ HƠN, KHÔNG PHẢI HACK BẤM LÀ FULL ĐỎ, BIẾT KÉO TÂM ĐẶT TÂM HÃNG MUA, ĐỪNG THẦN THÁNH FILE HỖ TRỢ LÀ PHẢI NHƯ AIM NHÉ!
-            </span>
+
+        <div class="price-row">
+            <span>DATA ANDROID</span>
+            <span class="price-value">150K/1 CHỨC NĂNG</span>
         </div>
     </div>
 
-    <div class="card">
-        <h2>🔮 MENU FLUORITE</h2>
-        <div class="price-table">
-            <div class="price-row"><span>TUẦN</span><span class="price-value">300K</span></div>
-            <div class="price-row"><span>THÁNG</span><span class="price-value">400K</span></div>
+    <div class="desc-box">
+        <span class="desc-text" style="color:var(--neon-green);font-weight:700;">
+SỬ DỤNG VĨNH VIỄN, AN TOÀN 100% KHÔNG CAN THIỆP VÀO GAME, CHỈ LÀ FILE NGOÀI MÁY GIÚP KÉO DỄ HƠN, KHÔNG PHẢI HACK BẤM LÀ FULL ĐỎ, BIẾT KÉO TÂM ĐẶT TÂM HÃNG MUA, ĐỪNG THẦN THÁNH FILE HỖ TRỢ LÀ PHẢI NHƯ AIM NHÉ!
+        </span>
+    </div>
+</div>
+
+<div class="card">
+    <h2>🔮 MENU FLUORITE</h2>
+
+    <div class="price-table">
+        <div class="price-row">
+            <span>TUẦN</span>
+            <span class="price-value">300K</span>
         </div>
-        <div class="desc-box">
-            <span class="desc-text">ĐỊNH VỊ ESP, AIMBOT GHIM ĐẦU
-            AIM FOV 360, AIM SILENT
-            ĐẠN THẲNG, BUFF 120 FPS
-            ẨN MÀN CÂN KÈO TIỀN
-            AN TOÀN HƠN MIGUL
-            CHƠI ĐỘI KÉO RANK ĐƯỢC
-            CÀI ĐƯỢC CHO TẤT CẢ IOS</span>
+
+        <div class="price-row">
+            <span>THÁNG</span>
+            <span class="price-value">400K</span>
         </div>
     </div>
 
-    <div class="card">
-       <h2>🚀 Proxy Aim – 3 LOẠI</h2>
-<span style="font-size: 14px; display: block;">
-  DRAG - DRAG ANTENNA - BODY
-</span>
-        <div style="margin-bottom: 15px;">
+    <div class="desc-box">
+        <span class="desc-text">
+ĐỊNH VỊ ESP, AIMBOT GHIM ĐẦU
+AIM FOV 360, AIM SILENT
+ĐẠN THẲNG, BUFF 120 FPS
+ẨN MÀN CÂN KÈO TIỀN
+AN TOÀN HƠN MIGUL
+CHƠI ĐỘI KÉO RANK ĐƯỢC
+CÀI ĐƯỢC CHO TẤT CẢ IOS
+        </span>
+    </div>
+</div>
+
+<div class="card">
+    <h2>🚀 PROXY AIM – 3 LOẠI</h2>
+
+    <span style="font-size:14px;display:block;margin-bottom:15px;">
+        DRAG - DRAG ANTENNA - BODY
+    </span>
+
+    <b style="font-size:.85rem;color:#ff00de;display:block;margin-bottom:10px;">
+        ĐỒNG GIÁ
+    </b>
+
+    <div class="price-table">
+        <div class="price-row">
+            <span>1 NGÀY</span>
+            <span class="price-value">40K</span>
         </div>
-        <div>
-            <b style="font-size: 0.85rem; color: #ff00de; display: block; margin-bottom: 10px;">ĐỒNG GIÁ</b>
-            <div class="price-table">
-                <div class="price-row"><span>1 NGÀY</span><span class="price-value">40K</span></div>
-                <div class="price-row"><span>1 TUẦN</span><span class="price-value">100K</span></div>
-                <div class="price-row"><span>1 THÁNG</span><span class="price-value">200K</span></div>
-            </div>
+
+        <div class="price-row">
+            <span>1 TUẦN</span>
+            <span class="price-value">100K</span>
+        </div>
+
+        <div class="price-row">
+            <span>1 THÁNG</span>
+            <span class="price-value">200K</span>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>🔥 MENU MIGUL LITE</h2>
+
+    <div class="price-table">
+        <div class="price-row">
+            <span>TUẦN</span>
+            <span class="price-value">200K</span>
+        </div>
+
+        <div class="price-row">
+            <span>THÁNG</span>
+            <span class="price-value">350K</span>
         </div>
     </div>
 
-    <div class="card">
-        <h2>🔥 MENU MIGUL LITE</h2>
-        <div class="price-table">
-            <div class="price-row"><span>TUẦN</span><span class="price-value">200K</span></div>
-            <div class="price-row"><span>THÁNG</span><span class="price-value">350K</span></div>
+    <div class="desc-box">
+        <span class="desc-text">
+KHÔNG HỖ TRỢ IP X - XS - XSM
+AIM FOV, AIMBOT GHIM ĐẦU
+ĐỊNH VỊ ESP, ĐẠN THẲNG
+        </span>
+    </div>
+</div>
+
+<div class="card">
+    <h2 style="color:#ff4500;">💀 MENU MIGUL PRO</h2>
+
+    <div class="price-table">
+        <div class="price-row">
+            <span>TUẦN</span>
+            <span class="price-value">250K</span>
         </div>
-        <div class="desc-box">
-            <span class="desc-text">KHÔNG HỖ TRỢ IP X - XS - XSM
-                AIM FOV, AIMBOT GHIM ĐẦU
-            ĐỊNH VỊ ESP, ĐẠN THẲNG</span>
+
+        <div class="price-row">
+            <span>THÁNG</span>
+            <span class="price-value">450K</span>
         </div>
     </div>
 
-    <div class="card">
-        <h2 style="color: #ff4500;">💀 MENU MIGUL PRO</h2>
-        <div class="price-table">
-            <div class="price-row"><span>TUẦN</span><span class="price-value">250K</span></div>
-            <div class="price-row"><span>THÁNG</span><span class="price-value">450K</span></div>
+    <div class="desc-box" style="border-left-color:#ff4500;">
+        <span class="desc-text">
+AIM FOV, AIMBOT GHIM ĐẦU
+KHÔNG HỖ TRỢ IP X - XS - XSM
+ĐỊNH VỊ ESP, ĐẠN THẲNG
+KÉO ĐỊCH, QUẤN MÁU NHANH
+TELEPORT 8M BẮN XUYÊN TƯỜNG
+CHẠY NHANH X2 NHẢY DÙ NHANH
+        </span>
+    </div>
+</div>
+
+<div class="card">
+    <h2>🛠️ CHỨNG CHỈ ESIGN</h2>
+
+    <div class="price-table">
+        <div class="price-row">
+            <span>CHỨNG CHỈ (KBH)</span>
+            <span class="price-value">100K</span>
         </div>
-        <div class="desc-box" style="border-left-color: #ff4500;">
-            <span class="desc-text">AIM FOV, AIMBOT GHIM ĐẦU
-            KHÔNG HỖ TRỢ IP X - XS - XSM
-            ĐỊNH VỊ ESP, ĐẠN THẲNG
-            KÉO ĐỊCH,QUẤN MÁU NHANH
-            TELEPORT 8M BẮN XUYÊN TƯỜNG
-            CHẠY NHANH X2 NHẢY DÙ NHANH</span>
+
+        <div class="price-row">
+            <span>VIP (BH1T+UNBAN)</span>
+            <span class="price-value">150K</span>
         </div>
     </div>
 
-    <div class="card">
-        <h2>🛠️ CHỨNG CHỈ ESIGN</h2>
-        <div class="price-table">
-            <div class="price-row"><span>CHỨNG CHỈ (KBH)</span><span class="price-value">100K</span></div>
-            <div class="price-row"><span>VIP (BH1T+UNBAN)</span><span class="price-value">150K</span></div>
-        </div>
-        <div class="desc-box" style="border-left-color: #fff;">
-            <span class="desc-text" style="color: #fff;">HẠN SỬ DỤNG 1 NĂM
-            ĐƯỢC CẤP NGAY LẬP TỨC
-            HỖ TRỢ IOS 12 TRỞ LÊN
-            DÙNG KÝ IPA, MENU HACK</span>
-        </div>
+    <div class="desc-box" style="border-left-color:#fff;">
+        <span class="desc-text" style="color:#fff;">
+HẠN SỬ DỤNG 1 NĂM
+ĐƯỢC CẤP NGAY LẬP TỨC
+HỖ TRỢ IOS 12 TRỞ LÊN
+DÙNG KÝ IPA, MENU HACK
+        </span>
     </div>
+</div>
 
-    <div class="card">
-        <h2>📱 ỨNG DỤNG PRO</h2>
-        <div style="margin-bottom: 20px;">
-            <b style="font-size: 0.85rem; color: #ffda44; display: block; margin-bottom: 10px;">LOCKET GOLD</b>
-            <div class="price-table">
-                <div class="price-row"><span>1 THÁNG</span><span class="price-value">40K</span></div>
-                <div class="price-row"><span>6 THÁNG</span><span class="price-value">120K</span></div>
-                <div class="price-row"><span>1 NĂM</span><span class="price-value">240K</span></div>
-            </div>
-        </div>
-        <div style="margin-bottom: 20px;">
-            <b style="font-size: 0.85rem; color: #00d2ff; display: block; margin-bottom: 10px;">CANVA PRO</b>
-            <div class="price-table">
-                <div class="price-row"><span>1 THÁNG</span><span class="price-value">40K</span></div>
-                <div class="price-row"><span>1 NĂM</span><span class="price-value">200K</span></div>
-                <div class="price-row"><span>VĨNH VIỄN</span><span class="price-value">600K</span></div>
-            </div>
-        </div>
-        <div>
-            <b style="font-size: 0.85rem; color: #ff00de; display: block; margin-bottom: 10px;">CAPCUT PRO</b>
-            <div class="price-table">
-                <div class="price-row"><span>1 THÁNG</span><span class="price-value">80K</span></div>
-                <div class="price-row"><span>6 THÁNG</span><span class="price-value">300K</span></div>
-                <div class="price-row"><span>12 THÁNG</span><span class="price-value">400K</span></div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div class="footer">
-    <div class="footer-info">ZALO/MB BANK: 0349045703</div>
-    <div style="color: var(--gold); margin-top: 10px; font-weight: 700; text-transform: uppercase;">CHỦ TÀI KHOẢN: NGUYEN MINH</div>
+    <div class="footer-info">
+        ZALO/MB BANK: 0349045703
+    </div>
+
+    <div class="owner">
+        CHỦ TÀI KHOẢN: NGUYEN MINH
+    </div>
 </div>
 
 <script>
-    const container = document.getElementById('starfield');
-    const starCount = 100; // Giảm bớt để mượt hơn trên mobile
 
-    for (let i = 0; i < starCount; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        const size = Math.random() * 2 + 'px';
-        star.style.width = size;
-        star.style.height = size;
-        star.style.top = Math.random() * 100 + '%';
-        star.style.left = Math.random() * 100 + '%';
-        const duration = Math.random() * 3 + 2 + 's';
-        star.style.animationDuration = duration;
-        star.style.animationDelay = Math.random() * 5 + 's';
-        container.appendChild(star);
-    }
+/* ===== STARS ===== */
+
+const container = document.getElementById('starfield');
+const starCount = 100;
+
+for(let i = 0; i < starCount; i++){
+
+    const star = document.createElement('div');
+
+    star.className = 'star';
+
+    const size = Math.random() * 2 + 'px';
+
+    star.style.width = size;
+    star.style.height = size;
+
+    star.style.top = Math.random() * 100 + '%';
+    star.style.left = Math.random() * 100 + '%';
+
+    star.style.animationDuration =
+        (Math.random() * 3 + 2) + 's';
+
+    star.style.animationDelay =
+        Math.random() * 5 + 's';
+
+    container.appendChild(star);
+}
+
+/* ===== FIRE RAIN ===== */
+
+function createFire(){
+
+    const fire = document.createElement('div');
+
+    fire.className = 'fire';
+
+    fire.innerHTML = '🔥';
+
+    fire.style.left = Math.random() * 100 + 'vw';
+
+    fire.style.fontSize =
+        (Math.random() * 18 + 15) + 'px';
+
+    fire.style.animationDuration =
+        (Math.random() * 3 + 3) + 's';
+
+    document.body.appendChild(fire);
+
+    setTimeout(() => {
+        fire.remove();
+    },7000);
+}
+
+setInterval(createFire,250);
+
 </script>
 
 </body>
