@@ -306,12 +306,13 @@ KÍ BẰNG ESIGN
             <span class="price-value">200K</span>
         </div>
         
-          <div class="price-row">
+        <div class="price-row">
             <span>1 NĂM</span>
             <span class="price-value">500K</span>
         </div>
     </div>
-<div class="desc-box">
+    
+    <div class="desc-box">
         <span class="desc-text">
 >AIMDRAG< 
 BẮN TỪ NGỰC TRỞ LÊN LÀ ĐỎ
@@ -326,7 +327,7 @@ BẮN TỪ NGỰC TRỞ LÊN LÀ ĐỎ
 </div>
 
 <div class="card">
-        <h2>👾 PROXY ADR DRIP CILENT</h2>
+    <h2>👾 PROXY ADR DRIP CILENT</h2>
 
     <div class="price-table">
         <div class="price-row">
@@ -351,7 +352,7 @@ NO ROOT, BỊ BAN ID
     <h2>🔥 MENU MIGUL LITE IOS</h2>
 
     <div class="price-table">
-               <div class="price-row">
+        <div class="price-row">
             <span>NGÀY</span>
             <span class="price-value">60K</span>
         </div>
@@ -380,8 +381,7 @@ KÍ BẰNG ESIGN
     <h2 style="color:#ff4500;">💀 MENU MIGUL PRO IOS</h2>
 
     <div class="price-table">
-        <div class="price-table">
-               <div class="price-row">
+        <div class="price-row">
             <span>NGÀY</span>
             <span class="price-value">80K</span>
         </div>
@@ -429,7 +429,7 @@ DÙNG KÝ IPA, MENU HACK
     </div>
 </div>
 
-<div class="footer">
+</div> <div class="footer">
     <div class="footer-info">
         ZALO/MB BANK: 0349045703
     </div>
@@ -440,62 +440,37 @@ DÙNG KÝ IPA, MENU HACK
 </div>
 
 <script>
-
 /* ===== STARS ===== */
-
 const container = document.getElementById('starfield');
 const starCount = 100;
 
 for(let i = 0; i < starCount; i++){
-
     const star = document.createElement('div');
-
     star.className = 'star';
-
     const size = Math.random() * 2 + 'px';
-
     star.style.width = size;
     star.style.height = size;
-
     star.style.top = Math.random() * 100 + '%';
     star.style.left = Math.random() * 100 + '%';
-
-    star.style.animationDuration =
-        (Math.random() * 3 + 2) + 's';
-
-    star.style.animationDelay =
-        Math.random() * 5 + 's';
-
+    star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+    star.style.animationDelay = Math.random() * 5 + 's';
     container.appendChild(star);
 }
 
 /* ===== FIRE RAIN ===== */
-
 function createFire(){
-
     const fire = document.createElement('div');
-
     fire.className = 'fire';
-
     fire.innerHTML = '🔥';
-
     fire.style.left = Math.random() * 100 + 'vw';
-
-    fire.style.fontSize =
-        (Math.random() * 18 + 15) + 'px';
-
-    fire.style.animationDuration =
-        (Math.random() * 3 + 3) + 's';
-
+    fire.style.fontSize = (Math.random() * 18 + 15) + 'px';
+    fire.style.animationDuration = (Math.random() * 3 + 3) + 's';
     document.body.appendChild(fire);
-
     setTimeout(() => {
         fire.remove();
     },7000);
 }
-
 setInterval(createFire,250);
-
 </script>
 
 </body>
